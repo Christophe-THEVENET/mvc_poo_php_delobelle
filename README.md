@@ -25,7 +25,7 @@ Composer est l'outil qui va nous permettre, dans notre projet, de gérer l'auto-
 ### Initialisation du projet
 
 ```bash
-composer init
+`composer init`
 ```
 
 #### Informations du projet
