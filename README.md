@@ -10,6 +10,8 @@ Ainsi, dans ce module, nous allons nous attarder sur les outils et mécanismes d
 
 Enfin, il existe probablement des milliers de façons d'implémenter un MVC. Nous viserons ici une approche "full objet", en tentant, dans le temps qui nous est imparti, d'introduire et garder en tête des notions d'architecture logicielle pour justifier les différents choix effectués.
 
+test fork et clone 
+
 ## Démarrage du projet avec Composer
 
 On va créer un dossier vierge et l'ouvrir avec VSCode. Dans un terminal positionné à la racine, on initialise un dépôt Git local avec `git init`.
