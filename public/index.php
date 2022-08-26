@@ -2,12 +2,18 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+
+
+//empecher que les raquetes soient en double avec la requete favicon
+// si on est pas en ligne de commande (on viens du navigateur) et qu on charge le favicon (.png, .jpg....)
+// alors return false donc pas de double requete 
 if (
   php_sapi_name() !== 'cli' && // Pas en mode ligne de commande
   preg_match('/\.(?:png|jpg|jpeg|gif|svg|ico)$/', $_SERVER['REQUEST_URI']) // extension = asset
 ) {
   return false;
-}
+} 
+
 
 use App\Controller\IndexController;
 use App\Controller\UserController;
@@ -71,6 +77,8 @@ $container->set(Environment::class, $twig);
 $container->set(UserRepository::class, $userRepository);
 // ***** FIN CONTAINER ***************************************************
 
+
+// si on est en ligne de commande alors on fait juste un return
 if (php_sapi_name() === 'cli') {
   return;
 }
@@ -92,6 +100,8 @@ try {
 
 
 // **** test insertion utilisateur a la mano ******************************
+
+
 
 /* use App\Entity\User;
 
