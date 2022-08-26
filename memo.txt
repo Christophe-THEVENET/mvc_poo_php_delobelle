@@ -107,3 +107,8 @@ on met a jour
 ``php vendor/bin/doctrine orm:schema-tool:update --dump-sql``
 
 
+----------- 4 / 8 -----------------
+variable d'environnement
+
+
+

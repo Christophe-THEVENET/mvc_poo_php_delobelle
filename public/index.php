@@ -93,7 +93,7 @@ try {
 
 // **** test insertion utilisateur a la mano ******************************
 
-use App\Entity\User;
+/* use App\Entity\User;
 
 $user = new User();
 
@@ -110,6 +110,7 @@ $entityManager->flush(); // execute pour envoyer plusieurs requetes (gros statem
 
 echo '<pre>';
 print_r($user);
-echo '</pre>';
+echo '</pre>'; */
 
 // **** fin test insertion utilisateur a la mano ****************************
+
