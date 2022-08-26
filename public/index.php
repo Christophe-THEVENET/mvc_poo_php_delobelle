@@ -22,10 +22,12 @@ use Symfony\Component\Dotenv\Dotenv;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+
 // **** ENV VARS *******************************************************
 $dotenv = new Dotenv();
 $dotenv->loadEnv(__DIR__ . '/../.env');
 // **** FIN ENV VARS ***************************************************
+
 
 // ****** DOCTRINE *****************************************************
 $paths = ['src/Entity']; // chemin des fichiers entités = classes transformée en table de données
@@ -48,17 +50,19 @@ $driver = new AttributeDriver($paths);
 $entityManager->getConfiguration()->setMetadataDriverImpl($driver);
 // ******* FIN DOCTRINE *************************************************
 
+
 // ******** TWIG ********************************************************
 $loader = new FilesystemLoader(__DIR__ . '/../templates');
 $twig = new Environment($loader, [
   'debug' => $_ENV['APP_ENV'] === 'dev',
   'cache' => __DIR__ . '/../var/cache/twig'
-]);// **** FIN TWIG ******************************************************
+]); // **** FIN TWIG ******************************************************
 
 
 // ***** REPOSITORIES ****************************************************
 $userRepository = new UserRepository($entityManager);
 // ***** FIN REPOSITORIES ************************************************
+
 
 // ***** CONTAINER *******************************************************
 $container = new Container();
@@ -85,3 +89,27 @@ try {
   echo "<p>" . $e->getMessage() . "</p>";
 }
 
+
+
+// **** test insertion utilisateur a la mano ******************************
+
+use App\Entity\User;
+
+$user = new User();
+
+$user->setName("Toto")
+  ->setFirstname("Ralou")
+  ->setUsername("Toto RAlou")
+  ->setPassword(password_hash('toto', PASSWORD_BCRYPT))
+  ->setEmail("toto@nol.mg")
+  ->setBirthDate(new DateTime('1961-05-06'));
+
+$entityManager->persist($user); // enregistre (statement)
+
+$entityManager->flush(); // execute pour envoyer plusieurs requetes (gros statement) en même temps
+
+echo '<pre>';
+print_r($user);
+echo '</pre>';
+
+// **** fin test insertion utilisateur a la mano ****************************
