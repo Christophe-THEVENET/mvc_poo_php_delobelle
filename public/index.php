@@ -4,9 +4,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 
 
-//empecher que les raquetes soient en double avec la requete favicon
+
+//empecher que les requetes soient en double avec la requete favicon suite redirection index.php
 // si on est pas en ligne de commande (on viens du navigateur) et qu on charge le favicon (.png, .jpg....)
-// alors return false donc pas de double requete 
+// alors return false donc pas de double requete de index.php (tout le script)
 if (
   php_sapi_name() !== 'cli' && // Pas en mode ligne de commande
   preg_match('/\.(?:png|jpg|jpeg|gif|svg|ico)$/', $_SERVER['REQUEST_URI']) // extension = asset
@@ -31,7 +32,8 @@ use Twig\Loader\FilesystemLoader;
 
 // **** ENV VARS *******************************************************
 $dotenv = new Dotenv();
-$dotenv->loadEnv(__DIR__ . '/../.env');
+$dotenv->loadEnv(__DIR__ . '/../.env'); // DIR = dossier courant
+// loadEnv va mapper le contenu du fichier .env ds la superglobale $_ENV
 // **** FIN ENV VARS ***************************************************
 
 
@@ -78,7 +80,7 @@ $container->set(UserRepository::class, $userRepository);
 // ***** FIN CONTAINER ***************************************************
 
 
-// si on est en ligne de commande alors on fait juste un return
+// si on est en ligne de commande alors on fait juste un return donc pas de requete index.php
 if (php_sapi_name() === 'cli') {
   return;
 }
@@ -103,7 +105,7 @@ try {
 
 
 
-/* use App\Entity\User;
+ use App\Entity\User;
 
 $user = new User();
 
@@ -119,8 +121,8 @@ $entityManager->persist($user); // enregistre (statement)
 $entityManager->flush(); // execute pour envoyer plusieurs requetes (gros statement) en même temps
 
 echo '<pre>';
-print_r($user);
-echo '</pre>'; */
+var_dump($user);
+echo '</pre>'; 
 
 // **** fin test insertion utilisateur a la mano ****************************
 

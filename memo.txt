@@ -70,12 +70,12 @@ entrée
 va réindexer l espace de travail
 
 
-il faut installer symfony/cache
+il faut installer le package symfony/cache (pour doctrine)
 
 ``composer r symfony/cache``
 
 
-il faut installer doctrine/annotations
+il faut installer le package doctrine/annotations 
 
 ``composer r doctrine/annotations``
 
@@ -111,5 +111,13 @@ on met a jour
 variable d'environnement
 
 
+qd on recupere le projet en local:
+
+`composer install`
+
+
+il faut installer le package dotenv:
+
+`composer r symfony/dotenv`
 
 
