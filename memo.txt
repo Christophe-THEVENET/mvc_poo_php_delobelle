@@ -1,0 +1,88 @@
+# MVC from scratch
+
+
+site liste les packages de composer
+>https://packagist.org/
+
+un vendor c est un editeur de paquet
+
+faire un ``composer install`` pour recuperer le dossier vendor ignoré qui contient les dépendances.
+
+composer va nos faire de l'autoloading pour charger les classes (il remplace les require_once)
+
+App/src/    ds composer.json  autoload psr-4 pour autoloader les classes qui sont ds src/
+
+donc qd on cree une classe => ``namespace App;`` au debut du code avant de creer la classe
+
+le dossie src est le dossier principal de l'appli. celui ou il y aura tout le code.
+
+public/index.php receptionne toutes les requetes.
+
+point d entree de l appli
+
+
+C'est le front controleur 
+
+pour demarrer le serveur
+
+``php -S localhost:8000 -t public/ public/index.php``
+
+pour eviter de repeter cette commande on declare un script ds le .json
+
+``composer start``
+
+DS LE JSON CONFIG PROCESS-TIMEOUT/ 0 sinon le serveur s arrete  ttes les 5min
+
+--------------------- 3/8 ------- DOCTRINE--------------
+
+
+les gitignore vide servent a commit les dossiers vide
+
+
+ le fichier index.php est l unique point d entree de l appli.
+
+ on le nomme le bootstrap
+
+ toutes les requetes du client passent par ce fichier et seront routées vers les bons controleurs.
+
+ORM DOctrine:
+
+doctrine-project.org
+Object Relational Mapper
+
+ds un nouveau projet on cree un nouvel utilisateur puis une base de donnees qui portera le meme nom. (sa partitionne les BDD qd on a plusieurs clients)
+
+on se connecte avec le nouvel utilisateur est on a que la bonne bdd.
+
+packaging.org toutes les dépendances de PHP
+
+``composer require doctrine/orm``
+
+
+CRTL MAJ p
+
+intelephense: index Workspace
+
+entrée
+
+va réindexer l espace de travail
+
+il faut installer symfony/cache
+
+``composer r symfony/cache``
+
+il faut installer doctrine/annotations
+
+
+``composer r doctrine/annotations``
+
+configurer cli
+
+creer fichier cli-config.php a la racine
+
+
+le mapping doctrine permet de creer des entités (users) pour la classe users
+
+sur php8 on peut utiliser les attributs
+
+ds se cours on utilise les annotations

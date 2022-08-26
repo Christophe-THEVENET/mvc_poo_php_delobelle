@@ -22,14 +22,15 @@ use Symfony\Component\Dotenv\Dotenv;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-// --- ENV VARS
+// **** ENV VARS *******************************************************
 $dotenv = new Dotenv();
 $dotenv->loadEnv(__DIR__ . '/../.env');
-// --- ENV VARS
+// **** FIN ENV VARS ***************************************************
 
-// --- DOCTRINE
-$paths = ['src/Entity'];
+// ****** DOCTRINE *****************************************************
+$paths = ['src/Entity']; // chemin des fichiers entités = classes transformée en table de données
 $isDevMode = $_ENV['APP_ENV'] === 'dev';
+
 
 $dbParams = [
   'driver'   => $_ENV['DB_DRIVER'],
@@ -45,26 +46,26 @@ $entityManager = EntityManager::create($dbParams, $config);
 
 $driver = new AttributeDriver($paths);
 $entityManager->getConfiguration()->setMetadataDriverImpl($driver);
-// --- DOCTRINE
+// ******* FIN DOCTRINE *************************************************
 
-// --- TWIG
+// ******** TWIG ********************************************************
 $loader = new FilesystemLoader(__DIR__ . '/../templates');
 $twig = new Environment($loader, [
   'debug' => $_ENV['APP_ENV'] === 'dev',
   'cache' => __DIR__ . '/../var/cache/twig'
 ]);
-// --- TWIG
+// **** FIN TWIG *********************************************************
 
-// --- REPOSITORIES
+// ***** REPOSITORIES ****************************************************
 $userRepository = new UserRepository($entityManager);
-// --- REPOSITORIES
+// ***** FIN REPOSITORIES ************************************************
 
-// --- CONTAINER
+// ***** CONTAINER *******************************************************
 $container = new Container();
 $container->set(EntityManager::class, $entityManager);
 $container->set(Environment::class, $twig);
 $container->set(UserRepository::class, $userRepository);
-// --- CONTAINER
+// ***** FIN CONTAINER ***************************************************
 
 if (php_sapi_name() === 'cli') {
   return;
@@ -83,3 +84,4 @@ try {
   echo "<p>Page non trouvée</p>";
   echo "<p>" . $e->getMessage() . "</p>";
 }
+

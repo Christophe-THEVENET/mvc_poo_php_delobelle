@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; // permet d utiliser le nsp ORM evite d utilisr plein de use
 use DateTime;
+
+// info de mapping pour doctrine par attribut https://www.doctrine-project.org/projects/doctrine-orm/en/2.13/reference/attributes-reference.html
 
 #[ORM\Entity(repositoryClass: "App\Repository\UserRepository")]
 #[ORM\Table(name: "users")]
+
+
+
+
 class User
 {
   #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue(strategy: "AUTO")]
