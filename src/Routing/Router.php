@@ -30,6 +30,8 @@ class Router
    * @param string $method
    * @return void
    */
+
+  /* ******************* ADD ROUTE ************************** */
   public function addRoute(
     string $name,
     string $url,
@@ -44,8 +46,10 @@ class Router
       'controller' => $controller,
       'method' => $method
     ];
-  }
+  }  /* ***************************************************** */
 
+
+  /* ******************* GET ROUTE ************************** */
   public function getRoute(string $uri, string $httpMethod): ?array
   {
     foreach ($this->routes as $route) {
@@ -55,7 +59,10 @@ class Router
     }
 
     return null;
-  }
+  } /* ***************************************************** */
+
+
+  /* ******************* EXECUTE**************************** */
 
   /**
    * Executes router on specified URI and HTTP Method

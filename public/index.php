@@ -33,8 +33,8 @@ use Twig\Loader\FilesystemLoader;
 // **** ENV VARS *******************************************************
 $dotenv = new Dotenv();
 $dotenv->loadEnv(__DIR__ . '/../.env'); // DIR = dossier courant
-// loadEnv va mapper le contenu du fichier .env ds la superglobale $_ENV
-// **** FIN ENV VARS ***************************************************
+// loadEnv va mapper le contenu du fichier .env puis .env.local ds la superglobale $_ENV
+// *********************************************************************
 
 
 // ****** DOCTRINE *****************************************************
@@ -56,7 +56,7 @@ $entityManager = EntityManager::create($dbParams, $config);
 
 $driver = new AttributeDriver($paths);
 $entityManager->getConfiguration()->setMetadataDriverImpl($driver);
-// ******* FIN DOCTRINE *************************************************
+// **********************************************************************
 
 
 // ******** TWIG ********************************************************
@@ -64,12 +64,12 @@ $loader = new FilesystemLoader(__DIR__ . '/../templates');
 $twig = new Environment($loader, [
   'debug' => $_ENV['APP_ENV'] === 'dev',
   'cache' => __DIR__ . '/../var/cache/twig'
-]); // **** FIN TWIG ******************************************************
+]); // ******************************************************************
 
 
 // ***** REPOSITORIES ****************************************************
 $userRepository = new UserRepository($entityManager);
-// ***** FIN REPOSITORIES ************************************************
+// ***********************************************************************
 
 
 // ***** CONTAINER *******************************************************
@@ -77,7 +77,7 @@ $container = new Container();
 $container->set(EntityManager::class, $entityManager);
 $container->set(Environment::class, $twig);
 $container->set(UserRepository::class, $userRepository);
-// ***** FIN CONTAINER ***************************************************
+// **********************************************************************
 
 
 // si on est en ligne de commande alors on fait juste un return donc pas de requete index.php
@@ -85,6 +85,7 @@ if (php_sapi_name() === 'cli') {
   return;
 }
 
+// ***** ROUTE *******************************************************
 $router = new Router($container);
 $router->registerRoutes();
 
@@ -97,7 +98,9 @@ try {
   http_response_code(404);
   echo "<p>Page non trouvée</p>";
   echo "<p>" . $e->getMessage() . "</p>";
-}
+} // *****************************************************************
+
+
 
 
 
@@ -105,7 +108,7 @@ try {
 
 
 
- use App\Entity\User;
+/*  use App\Entity\User;
 
 $user = new User();
 
@@ -118,11 +121,15 @@ $user->setName("Toto")
 
 $entityManager->persist($user); // enregistre (statement)
 
-$entityManager->flush(); // execute pour envoyer plusieurs requetes (gros statement) en même temps
+$entityManager->flush(); 
 
 echo '<pre>';
 var_dump($user);
 echo '</pre>'; 
+
+*/ // execute pour envoyer plusieurs requetes (gros statement) en même temps
+
+
 
 // **** fin test insertion utilisateur a la mano ****************************
 
