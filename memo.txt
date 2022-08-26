@@ -56,7 +56,9 @@ on se connecte avec le nouvel utilisateur est on a que la bonne bdd.
 
 packaging.org toutes les dépendances de PHP
 
+
 ``composer require doctrine/orm``
+
 
 
 CRTL MAJ p
@@ -67,14 +69,16 @@ entrée
 
 va réindexer l espace de travail
 
+
 il faut installer symfony/cache
 
 ``composer r symfony/cache``
 
+
 il faut installer doctrine/annotations
 
-
 ``composer r doctrine/annotations``
+
 
 configurer cli
 
@@ -85,4 +89,21 @@ le mapping doctrine permet de creer des entités (users) pour la classe users
 
 sur php8 on peut utiliser les attributs
 
-ds se cours on utilise les annotations
+2eme méthode: les annotations
+
+/** @Entity */
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="xxxx')
+ * 
+
+on valide le mapping
+
+``php vendor/bin/doctrine orm:validate-schema
+``
+on met a jour
+
+``php vendor/bin/doctrine orm:schema-tool:update --dump-sql``
+
+

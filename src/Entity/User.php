@@ -2,20 +2,20 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM; // permet d utiliser le nsp ORM evite d utilisr plein de use
+use Doctrine\ORM\Mapping as ORM; // permet d utiliser le namespace ORM evite d utilisr plein de use
 use DateTime;
 
 // info de mapping pour doctrine par attribut https://www.doctrine-project.org/projects/doctrine-orm/en/2.13/reference/attributes-reference.html
+
 
 #[ORM\Entity(repositoryClass: "App\Repository\UserRepository")]
 #[ORM\Table(name: "users")]
 
 
 
-
 class User
 {
-  #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue(strategy: "AUTO")]
+  #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue(strategy: "AUTO")] // mapping attributes PHP8 mini
   private int $id;
 
   #[ORM\Column(type: "string", length: 255)]
@@ -36,6 +36,25 @@ class User
   #[ORM\Column(type: "datetime", nullable: true)]
   private DateTime $birthDate;
 
+
+
+// il y a une autre méthode a connaître: annotations utilisée avant PHP8 ex:
+
+/** @Entity */
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="xxxx')
+ * 
+ */
+
+ /** @Column(type="integer") */
+
+ 
+
+
+
+  // ----- getters and setters 
   public function getId(): int
   {
     return $this->id;

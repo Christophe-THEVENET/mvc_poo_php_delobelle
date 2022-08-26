@@ -53,8 +53,8 @@ $loader = new FilesystemLoader(__DIR__ . '/../templates');
 $twig = new Environment($loader, [
   'debug' => $_ENV['APP_ENV'] === 'dev',
   'cache' => __DIR__ . '/../var/cache/twig'
-]);
-// **** FIN TWIG *********************************************************
+]);// **** FIN TWIG ******************************************************
+
 
 // ***** REPOSITORIES ****************************************************
 $userRepository = new UserRepository($entityManager);
