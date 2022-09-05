@@ -1,4 +1,4 @@
-# MVC from scratch
+# ********************* MVC from scratch ****************************************
 
 
 site liste les packages de composer
@@ -32,6 +32,19 @@ pour eviter de repeter cette commande on declare un script ds le .json
 ``composer start``
 
 DS LE JSON CONFIG PROCESS-TIMEOUT/ 0 sinon le serveur s arrete  ttes les 5min
+
+
+_____________ 2 / 8 _____________
+
+Le modele
+
+Les entités sont les classes représentant les tables de la BDD
+
+les tables sont générées automatiquement
+
+les instances de ces classes vont nous permettre de manipuler la base de donnée
+
+
 
 --------------------- 3/8 ------- DOCTRINE--------------
 
@@ -98,14 +111,17 @@ sur php8 on peut utiliser les attributs
  * @ORM\Table(name="xxxx')
  * 
 
+qd la classe est crée  (entité):
+
 on valide le mapping
 
 ``php vendor/bin/doctrine orm:validate-schema
 ``
-on met a jour
+on met a jour la bdd
 
 ``php vendor/bin/doctrine orm:schema-tool:update --dump-sql``
 
+normalement ds phpmyadmin on a une nouvelle table crée par le mapping de la nouvelle classe
 
 ----------- 4 / 8 -----------------
 variable d'environnement

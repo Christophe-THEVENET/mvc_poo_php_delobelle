@@ -12,6 +12,15 @@ use DateTime;
 #[ORM\Table(name: "users")]
 
 
+/* qd la classe (entité) et le mapping et crée on valide:
+`php vendor/bin/doctrine orm:validate-schema`
+
+on met à jour la BDD:
+`php vendor/bin/doctrine orm:schema-tool:update --dump-sql`
+
+normalement ds phpmyadmin on a une nouvelle table crée par le mapping de la nouvelle classe
+*/
+
 
 class User
 {
@@ -37,7 +46,6 @@ class User
   private DateTime $birthDate;
 
 
-
 // il y a une autre méthode a connaître: annotations utilisée avant PHP8 ex:
 
 /** @Entity */
@@ -51,9 +59,6 @@ class User
  /** @Column(type="integer") */
 
  
-
-
-
   // ----- getters and setters 
   public function getId(): int
   {
